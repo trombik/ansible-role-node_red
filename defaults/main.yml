@@ -1,0 +1,8 @@
+node_red_user: node_red
+node_red_group: node_red
+node_red_log_dir: /var/log/node_red
+node_red_db_dir: "{{ __node_red_db_dir }}"
+node_red_service: node_red
+node_red_conf_dir: "{{ __node_red_conf_dir }}"
+node_red_conf_file: "{{ __node_red_conf_dir }}/node_red.conf"
+node_red_flags: ""

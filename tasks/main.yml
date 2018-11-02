@@ -1,0 +1,37 @@
+---
+# tasks file for ansible-role-node_red
+
+- include_vars: "{{ ansible_os_family }}.yml"
+
+- include: "install-{{ ansible_os_family }}.yml"
+
+- name: Create log directory
+  file:
+    path: "{{ node_red_log_dir }}"
+    mode: 0755
+    owner: "{{ node_red_user }}"
+    group: "{{ node_red_group }}"
+    state: directory
+  notify: Restart node_red
+
+- name: Create db directory
+  file:
+    path: "{{ node_red_db_dir }}"
+    mode: 0755
+    owner: "{{ node_red_user }}"
+    group: "{{ node_red_group }}"
+    state: directory
+  notify: Restart node_red
+
+- name: Create node_red.conf
+  template:
+    src: node_red.conf.j2
+    dest: "{{ node_red_conf_file }}"
+    validate: echo %s
+  notify: Restart node_red
+
+- name: Start node_red
+  service:
+    name: "{{ node_red_service }}"
+    enabled: true
+    state: started

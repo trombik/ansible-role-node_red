@@ -1,0 +1,5 @@
+- hosts: localhost
+  roles:
+    - ansible-role-node_red
+  vars:
+    node_red_config: ""

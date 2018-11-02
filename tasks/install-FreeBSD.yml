@@ -1,0 +1,6 @@
+---
+
+- name: Install node_red
+  pkgng:
+    name: node_red
+    state: present
