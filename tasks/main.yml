@@ -39,12 +39,15 @@
     state: directory
   notify: Restart node_red
 
+- name: Create node_red_conf_dir
+  file:
+    path: "{{ node_red_conf_dir }}"
+    state: directory
+
 - name: Create settings.js
   template:
     src: settings.js.j2
     dest: "{{ node_red_conf_file }}"
-    owner: "{{ node_red_user }}"
-    group: "{{ node_red_group }}"
   notify: Restart node_red
 
 - name: Start node_red

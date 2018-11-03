@@ -3,19 +3,24 @@ require "serverspec"
 
 package = "node-red"
 service = "node_red"
-root_dir = "/opt/node-red"
+root_dir = "/var/lib/node-red"
 user    = "node-red"
 group   = "node-red"
 ports   = [1880]
 log_file = "/var/log/syslog"
 extra_npm_packages = %w[node-red-contrib-influxdb]
+conf_dir = "/etc/node-red"
+default_user = "root"
+default_group = "root"
 
 case os[:family]
 when "freebsd"
-  root_dir = "/usr/local/node-red"
+  root_dir = "/var/db/node-red"
   log_file = "/var/log/messages"
+  conf_dir = "/usr/local/etc/node-red"
+  default_group = "wheel"
 end
-config = "#{root_dir}/settings.js"
+config = "#{conf_dir}/settings.js"
 
 describe command "npm list -g --depth 0" do
   its(:exit_status) { should eq 0 }
@@ -30,9 +35,17 @@ describe file(config) do
   it { should exist }
   it { should be_file }
   it { should be_mode 644 }
+  it { should be_owned_by default_user }
+  it { should be_grouped_into default_group }
+  its(:content) { should match(%r{^// Managed by ansible$}) }
+end
+
+describe file root_dir do
+  it { should exist }
+  it { should be_directory }
   it { should be_owned_by user }
   it { should be_grouped_into group }
-  its(:content) { should match(%r{^// Managed by ansible$}) }
+  it { should be_mode 755 }
 end
 
 describe service(service) do
