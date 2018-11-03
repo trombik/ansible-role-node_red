@@ -14,7 +14,7 @@ KillSignal=SIGINT
 # Auto restart on crash
 Restart=on-failure
 # Tag things in the log
-SyslogIdentifier=Node-RED
+SyslogIdentifier={{ node_red_service }}
 StandardOutput=syslog
 StandardError=syslog
 

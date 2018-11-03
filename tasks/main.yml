@@ -12,11 +12,11 @@
     name: "{{ node_red_user }}"
     group: "{{ node_red_group }}"
     home: "{{ node_red_root }}"
-    comment: node-red user
+    comment: "{{ node_red_user }} user"
 
 - name: Install node-red
   npm:
-    name: node-red
+    name: "{{ node_red_package }}"
     global: yes
     production: yes
 

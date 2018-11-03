@@ -4,8 +4,8 @@ require "serverspec"
 package = "node-red"
 service = "node_red"
 root_dir = "/opt/node-red"
-user    = "node_red"
-group   = "node_red"
+user    = "node-red"
+group   = "node-red"
 ports   = [1880]
 log_file = "/var/log/syslog"
 
