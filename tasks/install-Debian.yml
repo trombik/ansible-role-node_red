@@ -8,11 +8,11 @@
 - name: Create systemd unit file
   template:
     src: systemd_unit.j2
-    dest: /lib/systemd/system/node_red.service
+    dest: "/lib/systemd/system/{{ node_red_service }}.service"
   notify: Restart node_red
 
 - name: Enable node_red
   systemd:
-    name: node_red
+    name: "{{ node_red_service }}"
     enabled: yes
     daemon_reload: yes

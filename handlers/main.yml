@@ -2,7 +2,7 @@
 
 - name: Restart node_red
   service:
-    name: node_red
+    name: "{{ node_red_service }}"
     state: restarted
   notify:
     - Wait for node-red to start in handler
