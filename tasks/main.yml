@@ -3,35 +3,56 @@
 
 - include_vars: "{{ ansible_os_family }}.yml"
 
+- name: Create node_red group
+  group:
+    name: "{{ node_red_group }}"
+
+- name: Create node_red user
+  user:
+    name: "{{ node_red_user }}"
+    group: "{{ node_red_group }}"
+    home: "{{ node_red_root }}"
+    comment: node-red user
+
+- name: Install node-red
+  npm:
+    name: node-red
+    global: yes
+    production: yes
+
 - include: "install-{{ ansible_os_family }}.yml"
 
-- name: Create log directory
+- name: Create node_red_root directory
   file:
+    path: "{{ node_red_root }}"
+    mode: 0755
+    owner: "{{ node_red_user }}"
+    group: "{{ node_red_group }}"
+    state: directory
+  notify: Restart node_red
+
+- name: Create node_red_log_dir
+  file:
+    state: directory
     path: "{{ node_red_log_dir }}"
-    mode: 0755
     owner: "{{ node_red_user }}"
     group: "{{ node_red_group }}"
-    state: directory
   notify: Restart node_red
 
-- name: Create db directory
-  file:
-    path: "{{ node_red_db_dir }}"
-    mode: 0755
-    owner: "{{ node_red_user }}"
-    group: "{{ node_red_group }}"
-    state: directory
-  notify: Restart node_red
-
-- name: Create node_red.conf
+- name: Create settings.js
   template:
-    src: node_red.conf.j2
+    src: settings.js.j2
     dest: "{{ node_red_conf_file }}"
-    validate: echo %s
+    owner: "{{ node_red_user }}"
+    group: "{{ node_red_group }}"
   notify: Restart node_red
 
 - name: Start node_red
   service:
     name: "{{ node_red_service }}"
-    enabled: true
     state: started
+
+- name: Wait for node-red to start in task
+  wait_for:
+    host: "{{ node_red_bind_address.split(':')[0] }}"
+    port: "{{ node_red_bind_address.split(':')[1] }}"

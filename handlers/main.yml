@@ -4,3 +4,10 @@
   service:
     name: node_red
     state: restarted
+  notify:
+    - Wait for node-red to start in handler
+
+- name: Wait for node-red to start in handler
+  wait_for:
+    host: "{{ node_red_bind_address.split(':')[0] }}"
+    port: "{{ node_red_bind_address.split(':')[1] }}"

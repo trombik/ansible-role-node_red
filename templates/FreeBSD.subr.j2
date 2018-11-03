@@ -1,0 +1,39 @@
+#!/bin/sh
+# Managed by ansible
+
+# PROVIDE: node_red
+# REQUIRE: NETWORKING SERVERS DAEMON
+# BEFORE:  LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="{{ node_red_service }}"
+rcvar=${name}_enable
+
+load_rc_config $name
+
+: ${node_red_enable="NO"}
+: ${node_red_user="{{ node_red_user }}"}
+: ${node_red_group="{{ node_red_group }}"}
+: ${node_red_dir="{{ node_red_root }}"}
+: ${node_red_log_dir="{{ node_red_log_dir }}"}
+: ${node_red_config="{{ node_red_conf_file }}"}
+
+extra_commands="status"
+procname="/usr/local/bin/node-red"
+pidfile="/var/run/$name.pid"
+command="/usr/sbin/daemon"
+command_args="-f -c -p ${pidfile} -o ${node_red_log_dir}/node-red.log \
+    ${procname} --settings ${node_red_config} --userDir ${node_red_dir}"
+
+start_precmd="node_red_startprecmd"
+
+node_red_startprecmd()
+{
+    if [ ! -e ${pidfile} ]; then
+        install -o ${node_red_user} -g ${node_red_group} /dev/null ${pidfile};
+    fi
+}
+
+run_rc_command "$1"

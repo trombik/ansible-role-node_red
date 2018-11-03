@@ -1,8 +1,9 @@
 node_red_user: node_red
 node_red_group: node_red
-node_red_log_dir: /var/log/node_red
-node_red_db_dir: "{{ __node_red_db_dir }}"
 node_red_service: node_red
-node_red_conf_dir: "{{ __node_red_conf_dir }}"
-node_red_conf_file: "{{ __node_red_conf_dir }}/node_red.conf"
+node_red_root: "{{ __node_red_root }}"
+node_red_conf_file: "{{ node_red_root }}/settings.js"
+node_red_extra_packages: []
+node_red_log_dir: "{{ node_red_root }}/log"
+node_red_bind_address: "127.0.0.1:1880"
 node_red_flags: ""
