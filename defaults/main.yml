@@ -4,6 +4,5 @@ node_red_service: node_red
 node_red_root: "{{ __node_red_root }}"
 node_red_conf_file: "{{ node_red_root }}/settings.js"
 node_red_extra_packages: []
-node_red_log_dir: "{{ node_red_root }}/log"
 node_red_bind_address: "127.0.0.1:1880"
 node_red_flags: ""

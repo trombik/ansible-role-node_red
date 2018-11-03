@@ -7,10 +7,12 @@ root_dir = "/opt/node-red"
 user    = "node_red"
 group   = "node_red"
 ports   = [1880]
+log_file = "/var/log/syslog"
 
 case os[:family]
 when "freebsd"
   root_dir = "/usr/local/node-red"
+  log_file = "/var/log/messages"
 end
 config = "#{root_dir}/settings.js"
 
@@ -38,4 +40,8 @@ ports.each do |p|
   describe port(p) do
     it { should be_listening }
   end
+end
+
+describe file log_file do
+  its(:content) { should match(/node_red.*Server now running at http/) }
 end

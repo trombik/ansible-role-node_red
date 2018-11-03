@@ -5,12 +5,6 @@
     name: "{{ item }}"
   with_items: "{{ node_red_extra_packages }}"
 
-- name: Install forever
-  npm:
-    name: forever
-    global: yes
-    production: yes
-
 - name: Create rc.subr script for node-red
   template:
     src: FreeBSD.subr.j2
