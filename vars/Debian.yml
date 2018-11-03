@@ -1,1 +1,2 @@
-__node_red_root: "/opt/node-red"
+__node_red_root: /var/lib/node-red
+__node_red_conf_dir: /etc/node-red
