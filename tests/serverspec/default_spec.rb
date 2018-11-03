@@ -8,6 +8,7 @@ user    = "node-red"
 group   = "node-red"
 ports   = [1880]
 log_file = "/var/log/syslog"
+extra_npm_packages = %w[node-red-contrib-influxdb]
 
 case os[:family]
 when "freebsd"
@@ -20,6 +21,9 @@ describe command "npm list -g --depth 0" do
   its(:exit_status) { should eq 0 }
   its(:stderr) { should eq "" }
   its(:stdout) { should match(/^\+-- #{package}@\d+\.\d+\.\d+$/) }
+  extra_npm_packages.each do |p|
+    its(:stdout) { should match(/^\+-- #{p}@\d+\.\d+\.\d+$/) }
+  end
 end
 
 describe file(config) do

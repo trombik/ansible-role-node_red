@@ -5,5 +5,6 @@ node_red_package: node-red
 node_red_root: "{{ __node_red_root }}"
 node_red_conf_file: "{{ node_red_root }}/settings.js"
 node_red_extra_packages: []
+node_red_extra_npm_packages: []
 node_red_bind_address: "127.0.0.1:1880"
 node_red_flags: ""
