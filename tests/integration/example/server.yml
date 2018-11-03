@@ -9,4 +9,52 @@
 
   pre_tasks:
   roles:
-    - node_red
+    - trombik.influxdb
+    - trombik.nodejs
+    - ansible-role-node_red
+  vars:
+    influxdb_bind_address: 127.0.0.1:8088
+    influxdb_config: |
+      reporting-disabled = true
+      bind-address = "{{ influxdb_bind_address }}"
+      [meta]
+        dir = "{{ influxdb_db_dir }}/meta"
+      [data]
+        dir = "{{ influxdb_db_dir }}/data"
+        wal-dir = "{{ influxdb_db_dir }}/wal"
+      [coordinator]
+      [retention]
+      [shard-precreation]
+      [monitor]
+      [http]
+      [ifql]
+      [logging]
+      [subscriber]
+      [[graphite]]
+      [[collectd]]
+      [[opentsdb]]
+      [[udp]]
+      [tls]
+    node_red_extra_npm_packages:
+      - name: node-red-contrib-influxdb
+        state: present
+    node_red_config: |
+      module.exports = {
+        uiPort: {{ node_red_bind_address.split(':')[1] }},
+        mqttReconnectTime: 15000,
+        serialReconnectTime: 15000,
+        debugMaxLength: 1000,
+        functionGlobalContext: {},
+        logging: {
+          console: {
+            level: "info",
+            metrics: false,
+            audit: false
+          }
+        },
+        editorTheme: {
+          projects: {
+            enabled: false
+          }
+        },
+      }

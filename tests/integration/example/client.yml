@@ -9,4 +9,3 @@
 
   pre_tasks:
   roles:
-    - node_red
