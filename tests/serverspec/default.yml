@@ -1,5 +1,33 @@
 - hosts: localhost
   roles:
+    - name: trombik.apt_repo
+      when: ansible_os_family == 'Debian'
+    - name: trombik.nodejs
     - ansible-role-node_red
   vars:
-    node_red_config: ""
+    apt_repo_keys_to_add:
+      - https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+    apt_repo_enable_apt_transport_https: yes
+    apt_repo_to_add:
+      - "deb https://deb.nodesource.com/node_8.x {{ ansible_distribution_release }} main"
+    nodejs_npm_package: "{% if ansible_os_family == 'Debian' %}nodejs{% else %}npm{% endif %}"
+    node_red_config: |
+      module.exports = {
+        uiPort: {{ node_red_bind_address.split(':')[1] }},
+        mqttReconnectTime: 15000,
+        serialReconnectTime: 15000,
+        debugMaxLength: 1000,
+        functionGlobalContext: {},
+        logging: {
+          console: {
+            level: "info",
+            metrics: false,
+            audit: false
+          }
+        },
+        editorTheme: {
+          projects: {
+            enabled: false
+          }
+        },
+      }

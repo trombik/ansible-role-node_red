@@ -1,0 +1,18 @@
+---
+
+- name: Install node_red_extra_packages
+  apt:
+    name: "{{ item }}"
+  with_items: "{{ node_red_extra_packages }}"
+
+- name: Create systemd unit file
+  template:
+    src: systemd_unit.j2
+    dest: /lib/systemd/system/node_red.service
+  notify: Restart node_red
+
+- name: Enable node_red
+  systemd:
+    name: node_red
+    enabled: yes
+    daemon_reload: yes

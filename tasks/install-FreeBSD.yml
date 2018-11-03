@@ -1,6 +1,26 @@
 ---
 
-- name: Install node_red
+- name: Install node_red_extra_packages
   pkgng:
+    name: "{{ item }}"
+  with_items: "{{ node_red_extra_packages }}"
+
+- name: Install forever
+  npm:
+    name: forever
+    global: yes
+    production: yes
+
+- name: Create rc.subr script for node-red
+  template:
+    src: FreeBSD.subr.j2
+    dest: /usr/local/etc/rc.d/node_red
+    mode: 0755
+    validate: sh -n %s
+  notify:
+    - Restart node_red
+
+- name: Enable node_red
+  service:
     name: node_red
-    state: present
+    enabled: yes

@@ -1,2 +1,1 @@
-__node_red_db_dir: /var/db/node_red
-__node_red_conf_dir: /usr/local/etc/node_red
+__node_red_root: "/usr/local/node-red"
