@@ -1,6 +1,10 @@
 # ansible-role-node_red
 
-A brief description of the role goes here.
+## Logging
+
+`node-red` itself does not support granular logging outputs, but simple logging
+to a file. The role configures `node-red` to log all console outputs to
+`syslog`, which is not very pretty (duplicated time stamp).
 
 # Requirements
 

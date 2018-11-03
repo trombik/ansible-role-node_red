@@ -31,14 +31,6 @@
     state: directory
   notify: Restart node_red
 
-- name: Create node_red_log_dir
-  file:
-    state: directory
-    path: "{{ node_red_log_dir }}"
-    owner: "{{ node_red_user }}"
-    group: "{{ node_red_group }}"
-  notify: Restart node_red
-
 - name: Create settings.js
   template:
     src: settings.js.j2
