@@ -12,12 +12,12 @@ case os[:family]
 when "freebsd"
   root_dir = "/usr/local/node-red"
 end
-config  = "#{root_dir}/settings.js"
+config = "#{root_dir}/settings.js"
 
 describe command "npm list -g --depth 0" do
   its(:exit_status) { should eq 0 }
   its(:stderr) { should eq "" }
-  its(:stdout) { should match(/^\+-- node-red@\d+\.\d+\.\d+$/) }
+  its(:stdout) { should match(/^\+-- #{package}@\d+\.\d+\.\d+$/) }
 end
 
 describe file(config) do
