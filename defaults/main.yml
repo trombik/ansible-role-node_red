@@ -8,4 +8,5 @@ node_red_conf_file: "{{ node_red_conf_dir }}/settings.js"
 node_red_extra_packages: []
 node_red_extra_npm_packages: []
 node_red_bind_address: "127.0.0.1:1880"
+node_red_config: ""
 node_red_flags: ""
