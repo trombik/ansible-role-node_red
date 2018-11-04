@@ -27,7 +27,7 @@
     name: "{{ item.name }}"
     global: yes
     production: yes
-    state: "{{ item.state }}"
+    state: "{{ item.state | default(omit) }}"
   with_items: "{{ node_red_extra_npm_packages }}"
 
 - name: Create node_red_db_dir directory
