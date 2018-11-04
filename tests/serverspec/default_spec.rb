@@ -12,6 +12,7 @@ extra_npm_packages = %w[node-red-contrib-influxdb]
 conf_dir = "/etc/node-red"
 default_user = "root"
 default_group = "root"
+extra_packages = ["zsh"]
 
 case os[:family]
 when "freebsd"
@@ -21,6 +22,12 @@ when "freebsd"
   default_group = "wheel"
 end
 config = "#{conf_dir}/settings.js"
+
+extra_packages.each do |p|
+  describe package p do
+    it { should be_installed }
+  end
+end
 
 describe command "npm list -g --depth 0" do
   its(:exit_status) { should eq 0 }
