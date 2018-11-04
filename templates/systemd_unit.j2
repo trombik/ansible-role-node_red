@@ -8,7 +8,7 @@ Type=simple
 User={{ node_red_user }}
 Group={{ node_red_group }}
 Environment=NODE_OPTIONS="--max-old-space-size=128" NODE_RED_OPTIONS="-v"
-ExecStart=/usr/bin/node $NODE_OPTIONS /usr/bin/node-red --userDir {{ node_red_root }} --settings {{ node_red_conf_file }} $NODE_RED_OPTIONS
+ExecStart=/usr/bin/node $NODE_OPTIONS /usr/bin/node-red --userDir {{ node_red_db_dir }} --settings {{ node_red_conf_file }} $NODE_RED_OPTIONS
 # Use SIGINT to stop
 KillSignal=SIGINT
 # Auto restart on crash

@@ -3,7 +3,7 @@ require "serverspec"
 
 package = "node-red"
 service = "node_red"
-root_dir = "/var/lib/node-red"
+db_dir = "/var/lib/node-red"
 user    = "node-red"
 group   = "node-red"
 ports   = [1880]
@@ -15,7 +15,7 @@ default_group = "root"
 
 case os[:family]
 when "freebsd"
-  root_dir = "/var/db/node-red"
+  db_dir = "/var/db/node-red"
   log_file = "/var/log/messages"
   conf_dir = "/usr/local/etc/node-red"
   default_group = "wheel"
@@ -40,7 +40,7 @@ describe file(config) do
   its(:content) { should match(%r{^// Managed by ansible$}) }
 end
 
-describe file root_dir do
+describe file db_dir do
   it { should exist }
   it { should be_directory }
   it { should be_owned_by user }

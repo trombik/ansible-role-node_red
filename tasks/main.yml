@@ -11,7 +11,7 @@
   user:
     name: "{{ node_red_user }}"
     group: "{{ node_red_group }}"
-    home: "{{ node_red_root }}"
+    home: "{{ node_red_db_dir }}"
     comment: "{{ node_red_user }} user"
 
 - name: Install node-red
@@ -30,9 +30,9 @@
 
 - include: "install-{{ ansible_os_family }}.yml"
 
-- name: Create node_red_root directory
+- name: Create node_red_db_dir directory
   file:
-    path: "{{ node_red_root }}"
+    path: "{{ node_red_db_dir }}"
     mode: 0755
     owner: "{{ node_red_user }}"
     group: "{{ node_red_group }}"
