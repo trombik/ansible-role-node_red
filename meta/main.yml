@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: node_red
   author: Tomoyuki Sakurai
   description: Configures node-red
   company: N/A
