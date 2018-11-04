@@ -14,6 +14,8 @@
     home: "{{ node_red_db_dir }}"
     comment: "{{ node_red_user }} user"
 
+- include: "install-{{ ansible_os_family }}.yml"
+
 - name: Install node-red
   npm:
     name: "{{ node_red_package }}"
@@ -27,8 +29,6 @@
     production: yes
     state: "{{ item.state }}"
   with_items: "{{ node_red_extra_npm_packages }}"
-
-- include: "install-{{ ansible_os_family }}.yml"
 
 - name: Create node_red_db_dir directory
   file:

@@ -11,6 +11,9 @@
     apt_repo_to_add:
       - "deb https://deb.nodesource.com/node_8.x {{ ansible_distribution_release }} main"
     nodejs_npm_package: "{% if ansible_os_family == 'Debian' %}nodejs{% else %}npm{% endif %}"
+    node_red_extra_packages:
+      - name: zsh
+        state: present
     node_red_extra_npm_packages:
       - name: node-red-contrib-influxdb
         state: present

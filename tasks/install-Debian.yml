@@ -2,7 +2,8 @@
 
 - name: Install node_red_extra_packages
   apt:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
+    state: "{{ item.state | default(omit) }}"
   with_items: "{{ node_red_extra_packages }}"
 
 - name: Create systemd unit file
