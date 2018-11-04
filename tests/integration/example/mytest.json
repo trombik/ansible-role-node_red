@@ -1,0 +1,82 @@
+[
+  {
+    "id": "eb0e711.6bb349",
+    "type": "influxdb out",
+    "z": "12d6e7bd.7bac78",
+    "influxdb": "a61f866d.b24ed8",
+    "name": "",
+    "measurement": "random",
+    "precision": "",
+    "retentionPolicy": "",
+    "x": 560,
+    "y": 300,
+    "wires": [
+
+    ]
+  },
+  {
+    "id": "9a7a1972.a8c4f8",
+    "type": "function",
+    "z": "12d6e7bd.7bac78",
+    "name": "single value",
+    "func": "msg.payload = Math.random()*10;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 280,
+    "y": 440,
+    "wires": [
+      [
+        "eb0e711.6bb349",
+        "9e456ff4.af9b7"
+      ]
+    ]
+  },
+  {
+    "id": "a759f3ae.11947",
+    "type": "inject",
+    "z": "12d6e7bd.7bac78",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "1",
+    "crontab": "",
+    "once": false,
+    "onceDelay": "",
+    "x": 193,
+    "y": 303,
+    "wires": [
+      [
+        "9a7a1972.a8c4f8"
+      ]
+    ]
+  },
+  {
+    "id": "9e456ff4.af9b7",
+    "type": "debug",
+    "z": "12d6e7bd.7bac78",
+    "name": "",
+    "active": true,
+    "tosidebar": true,
+    "console": false,
+    "tostatus": false,
+    "complete": "false",
+    "x": 500,
+    "y": 520,
+    "wires": [
+
+    ]
+  },
+  {
+    "id": "a61f866d.b24ed8",
+    "type": "influxdb",
+    "z": "",
+    "hostname": "127.0.0.1",
+    "port": "8086",
+    "protocol": "http",
+    "database": "mytest",
+    "name": "",
+    "usetls": false,
+    "tls": ""
+  }
+]
