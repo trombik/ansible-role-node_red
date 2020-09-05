@@ -219,7 +219,7 @@ DEPENDENCIES
   kitchen-verifier-shell
   rake
   rspec
-  rubocop (~> 0.51.0)
+  rubocop
   serverspec
   specinfra
   test-kitchen
