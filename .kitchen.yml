@@ -2,6 +2,10 @@
 driver:
   name: vagrant
 
+driver_config:
+  network:
+    #- ["forwarded_port", {guest: 1880, host: 1880}]
+
 transport:
   name: rsync
 
@@ -21,21 +25,26 @@ provisioner:
     - filter_plugins
 
 platforms:
-  - name: freebsd-11.2-amd64
+  - name: freebsd-12.1-amd64
     driver:
-      box: trombik/ansible-freebsd-11.2-amd64
+      box: trombik/ansible-freebsd-12.1-amd64
       box_check_update: false
     driver_config:
       ssh:
         shell: '/bin/sh'
+      network:
+        - ["forwarded_port", {guest: 1880, host: 1880}]
     provisioner:
       extra_vars:
-        ansible_python_interpreter: '/usr/local/bin/python'
+        ansible_python_interpreter: '/usr/local/bin/python3'
 
   - name: ubuntu-18.04-amd64
     driver:
       box: trombik/ansible-ubuntu-18.04-amd64
       box_check_update: false
+    driver_config:
+      network:
+        - ["forwarded_port", {guest: 1880, host: 2880}]
 
 suites:
   - name: default

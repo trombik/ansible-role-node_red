@@ -2,9 +2,7 @@
 
 - name: Install node_red_extra_packages
   pkgng:
-    name: "{{ item.name }}"
-    state: "{{ item.state | default(omit) }}"
-  with_items: "{{ node_red_extra_packages }}"
+    name: "{{ node_red_extra_packages }}"
 
 - name: Create rc.subr script for node-red
   template:

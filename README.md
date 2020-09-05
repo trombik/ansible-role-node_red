@@ -31,12 +31,7 @@ to a file. The role configures `node-red` to log all console outputs to
 
 ## `node_red_extra_packages`
 
-A list of dict to install extra packages.
-
-| Key | Description | Mandatory? |
-|-----|-------------|------------|
-| `name` | Name of the package | Yes |
-| `state` | State of the package. The value should be one of supported `state` value of ansible package module, such as `present`. | No |
+A list of extra packages to install.
 
 ## `node_red_extra_npm_packages`
 
