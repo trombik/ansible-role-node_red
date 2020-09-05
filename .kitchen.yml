@@ -2,10 +2,6 @@
 driver:
   name: vagrant
 
-driver_config:
-  network:
-    #- ["forwarded_port", {guest: 1880, host: 1880}]
-
 transport:
   name: rsync
 
