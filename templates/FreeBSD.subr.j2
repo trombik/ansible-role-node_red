@@ -22,11 +22,12 @@ load_rc_config $name
 : ${node_red_priority:="notice"}
 
 extra_commands="status"
-procname="/usr/local/bin/node-red"
+node_red_command="/usr/local/bin/node-red"
+procname="node:"
 pidfile="/var/run/$name.pid"
 command="/usr/sbin/daemon"
 command_args="-c -p ${pidfile} -S -T ${name} -s ${node_red_priority} -l ${node_red_facility} \
-    ${procname} --settings ${node_red_config} --userDir ${node_red_dir}"
+    ${node_red_command} --settings ${node_red_config} --userDir ${node_red_dir}"
 
 start_precmd="node_red_startprecmd"
 
