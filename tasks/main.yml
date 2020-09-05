@@ -21,6 +21,8 @@
     name: "{{ node_red_package }}"
     global: yes
     production: yes
+  environment:
+    PATH: "/usr/local/bin:{{ ansible_env['PATH'] }}"
 
 - name: Install node_red_extra_npm_packages
   npm:
