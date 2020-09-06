@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source "https://rubygems.org"
 
 gem "infrataster", "~> 0.3.2", git: "https://github.com/trombik/infrataster.git", branch: "reallyenglish"
