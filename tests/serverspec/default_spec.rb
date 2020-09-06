@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 require "serverspec"
 
 package = "node-red"
 service = "node_red"
 db_dir = "/var/lib/node-red"
-user    = "node-red"
-group   = "node-red"
-ports   = [1880]
+user = "node-red"
+group = "node-red"
+ports = [1880]
 log_file = "/var/log/syslog"
 extra_npm_packages = %w[node-red-contrib-influxdb]
 conf_dir = "/etc/node-red"

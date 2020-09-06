@@ -1,7 +1,0 @@
----
-
-- name: trombik.apt_repo
-- name: trombik.nodejs
-- name: trombik.influxdb
-  src: https://github.com/trombik/ansible-role-influxdb
-  version: master
